@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+import rospy
+from beginner_tutorials.msg import ControlOutput, RoverState
+
+
+
+def reach_goal(current_state):
+    """ check whether goal state is reached """
+    print('current state ', current_state.x, current_state.y)
+    if abs(current_state.x - goal_state[0]) > tol or abs(current_state.y - goal_state[1]) > tol:
+	print('control output')
+	pub.publish(u)
+
+
+def fake_control():
+    rospy.init_node('fake_control', anonymous=True)
+    pub = rospy.Publisher('fake_control_output', ControlOutput, queue_size=10)
+    rospy.Subscriber('rover_state_update', RoverState, reach_goal)
+    print('control first output')   
+    pub.publish(u)
+
+    rospy.spin()
+
+if __name__ == '__main__':
+    try:
+	goal_state = [4.0, 5.8]
+	tol = .1
+	u = ControlOutput(1.0, 0.02)
+        fake_control()
+    except rospy.ROSInterruptException:
+        pass

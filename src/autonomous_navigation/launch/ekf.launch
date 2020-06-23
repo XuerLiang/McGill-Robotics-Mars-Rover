@@ -1,0 +1,7 @@
+<launch>
+
+    <node pkg="autonomous_navigation" name="fake_control" type="fake_control.py"/>
+    <node pkg="autonomous_navigation" name="fake_gps" type="fake_gps.py"/>
+    <node pkg="autonomous_navigation" name="EKF" type="EKF.py"/>
+
+</launch>
